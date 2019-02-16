@@ -24,3 +24,11 @@ MYSQL_ADD_COMPONENT(validate_password
   validate_password_imp.cc
   MODULE
   LINK_LIBRARIES library_mysys)
+
+ADD_EXECUTABLE(validate_password_fuzz
+        validate_password_fuzz.cc
+        validate_password_imp.cc
+        validate_password_imp.h
+        )
+TARGET_LINK_LIBRARIES(validate_password_fuzz library_mysys)
+TARGET_LINK_LIBRARIES(validate_password_fuzz FuzzingEngine)
