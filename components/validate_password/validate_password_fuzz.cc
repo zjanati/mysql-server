@@ -36,7 +36,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
   thread_local THD *thd = nullptr;
   string chaine(Data, Data+Size);
   unsigned int strength;
-  validate_password_imp::get_strength(thd, (my_h_string)&chaine, &strength);
+  //validate_password_imp::get_strength(thd, (my_h_string)&chaine, &strength);
 
   return 0;
 }
