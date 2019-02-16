@@ -24,17 +24,19 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
+#include <iostream>
 #include "validate_password_imp.h"
 #include "sql/current_thd.h"
 
+using namespace std;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
 
   thread_local THD *thd = nullptr;
-  String chaine(Data, Data+Size);
+  string chaine(Data, Data+Size);
   unsigned int strength;
-  validate_password_imp::getstrength(thd, (my_h_string)&chaine, &strength);
+  validate_password_imp::get_strength(thd, (my_h_string)&chaine, &strength);
 
   return 0;
 }
