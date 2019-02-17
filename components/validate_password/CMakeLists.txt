@@ -31,4 +31,5 @@ MYSQL_ADD_EXECUTABLE(validate_password_fuzz
         validate_password_imp.h
         )
 TARGET_LINK_LIBRARIES(validate_password_fuzz library_mysys)
+TARGET_LINK_LIBRARIES(validate_password_fuzz mysqlclient)
 TARGET_LINK_LIBRARIES(validate_password_fuzz FuzzingEngine)

@@ -24,10 +24,13 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string>
 #include <iostream>
+#include <mysql.h>
+#include <mysql/client_plugin.h>
+#include <mysqld_error.h>
 #include "validate_password_imp.h"
-#include "sql/current_thd.h"
 
 using namespace std;
 
@@ -36,6 +39,16 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
   thread_local THD *thd = nullptr;
   string chaine(Data, Data+Size);
   unsigned int strength;
+
+  MYSQL mysql;
+  mysql_init(&mysql);
+  mysql_options(&mysql, MYSQL_READ_DEFAULT_GROUP,"option");
+
+  if (!mysql_real_connect(&mysql,"localhost","root","root","",0,NULL,0)) {
+      printf("Can't connect!\n");
+      return 1;
+  }
+  mysql_close(&mysql);
   //validate_password_imp::get_strength(thd, (my_h_string)&chaine, &strength);
 
   return 0;
