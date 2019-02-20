@@ -33,3 +33,6 @@ MYSQL_ADD_EXECUTABLE(validate_password_fuzz
 TARGET_LINK_LIBRARIES(validate_password_fuzz library_mysys)
 TARGET_LINK_LIBRARIES(validate_password_fuzz mysqlclient)
 TARGET_LINK_LIBRARIES(validate_password_fuzz FuzzingEngine)
+TARGET_LINK_LIBRARIES(mysqld
+  sql_main sql_gis binlog rpl master slave sql_main sql_dd sql_gis mysys mysys_ssl
+  binlogevents_static ${ICU_LIBRARIES})
