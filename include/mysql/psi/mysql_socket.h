@@ -644,6 +644,10 @@ static inline int inline_mysql_socket_connect(
   }
 #endif
 
+#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
+	return 0;
+#endif
+
   /* Non instrumented code */
   result = connect(mysql_socket.fd, addr, len);
 

@@ -22,6 +22,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#define FUZZING_BUILD_WITH_NETWORK_INJECTION
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -39,11 +41,11 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
   thread_local THD *thd = nullptr;
   string chaine(Data, Data+Size);
   unsigned int strength;
-
+*/
   MYSQL mysql;
   mysql_init(&mysql);
-  mysql_options(&mysql, MYSQL_READ_DEFAULT_GROUP,"option");
-
+  //mysql_options(&mysql, MYSQL_READ_DEFAULT_GROUP,"option");
+	printf("Ok jusque là");
   if (!mysql_real_connect(&mysql,"localhost","root","root","",0,NULL,0)) {
       printf("Can't connect!\n");
       return 1;
