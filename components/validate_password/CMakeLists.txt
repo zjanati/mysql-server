@@ -25,14 +25,14 @@ MYSQL_ADD_COMPONENT(validate_password
   MODULE
   LINK_LIBRARIES library_mysys)
 
-MYSQL_ADD_EXECUTABLE(validate_password_fuzz
-        validate_password_fuzz.cc
-        validate_password_imp.cc
-        validate_password_imp.h
-        )
-TARGET_LINK_LIBRARIES(validate_password_fuzz library_mysys)
+#MYSQL_ADD_EXECUTABLE(validate_password_fuzz
+#        validate_password_fuzz.cc
+#        validate_password_imp.cc
+#        validate_password_imp.h
+#        )
+#TARGET_LINK_LIBRARIES(validate_password_fuzz library_mysys)
 #TARGET_LINK_LIBRARIES(validate_password_fuzz mysqlclient)
-TARGET_LINK_LIBRARIES(validate_password_fuzz FuzzingEngine)
+#TARGET_LINK_LIBRARIES(validate_password_fuzz FuzzingEngine)
 #TARGET_LINK_LIBRARIES(validate_password_fuzz
 #  sql_main sql_gis binlog rpl master slave sql_main sql_dd sql_gis mysys mysys_ssl
 #  binlogevents_static ${ICU_LIBRARIES})
