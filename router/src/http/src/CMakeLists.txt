@@ -20,11 +20,21 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-ADD_LIBRARY(http_common
-  SHARED
-  http_common.cc
-  http_time.cc
-  )
+
+
+IF(DISABLE_SHARED)
+    ADD_LIBRARY(http_common
+    STATIC
+    http_common.cc
+    http_time.cc
+    )
+ELSE()
+    ADD_LIBRARY(http_common
+        SHARED
+        http_common.cc
+        http_time.cc
+     )
+ENDIF()
 TARGET_LINK_LIBRARIES(http_common
   ${LIBEVENT_LIBRARIES})
 
@@ -39,11 +49,19 @@ ADD_HARNESS_PLUGIN(http_server
   http_server_component.cc
   REQUIRES router_lib;http_common;${LIBRT})
 
-ADD_LIBRARY(http_client
-  SHARED
-  http_client.cc
-  rest_client.cc
-  )
+  IF(DISABLE_SHARED)
+      ADD_LIBRARY(http_client
+      STATIC
+      http_client.cc
+      rest_client.cc
+      )
+  ELSE()
+      ADD_LIBRARY(http_client
+          SHARED
+          http_client.cc
+          rest_client.cc
+       )
+  ENDIF()
 TARGET_LINK_LIBRARIES(http_client
   ${LIBEVENT_LIBRARIES}
   ${LIBRT}
