@@ -142,7 +142,11 @@ IF(THREADS_HAVE_PTHREAD_ARG)
 ENDIF()
 
 # create harness library - dynamic version
-ADD_LIBRARY(harness-library SHARED ${harness_source})
+IF(DISABLE_SHARED)
+    ADD_LIBRARY(harness-library STATIC ${harness_source})
+  ELSE()
+    ADD_LIBRARY(harness-library SHARED ${harness_source})
+  ENDIF()
 TARGET_LINK_LIBRARIES(harness-library ${common_libraries})
 TARGET_INCLUDE_DIRECTORIES(harness-library PUBLIC include)
 
