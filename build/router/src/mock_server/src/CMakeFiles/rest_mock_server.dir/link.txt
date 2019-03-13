@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc rest_mock_server.so  CMakeFiles/rest_mock_server.dir/rest_mock_server.cc.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib rest_mock_server.so
