@@ -67,7 +67,7 @@ IF(NOT WIN32)
 
   ADD_LIBRARY(router_lib SHARED ${lib_source_files} ${common_files})
 
-  ELSE()
+
 ELSE()
   # on Windows, we statically link the router lib to otherwise avoid exporting a bunch of symbols
   ADD_LIBRARY(router_lib STATIC ${lib_source_files})
