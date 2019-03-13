@@ -21,3 +21,7 @@ extra/wolfssl-*
 
 # Configuration files for Visual Studio Code
 .vscode/
+
+# For sublime projects
+*.sublime-project
+*.sublime-workspace
