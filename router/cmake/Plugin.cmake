@@ -90,11 +90,9 @@ FUNCTION(add_harness_plugin NAME)
   # intend to link against it, which is something that MODULE does not
   # allow. On OSX, this means that the suffix for the library becomes
   # .dylib, which we do not want, so we reset it here.
-  IF(DISABLE_SHARED)
-    ADD_LIBRARY(${NAME} STATIC ${_option_SOURCES})
-  ELSE()
+
     ADD_LIBRARY(${NAME} SHARED ${_option_SOURCES})
-  ENDIF()
+
   # add plugin to build-all target
   ADD_DEPENDENCIES(${MYSQL_ROUTER_BUILD_ALL_TARGET} ${NAME})
   IF(_option_OUTPUT_NAME)

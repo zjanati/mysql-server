@@ -32,11 +32,8 @@ SET(include_dirs
 
 IF(NOT WIN32)
 
-  IF(DISABLE_SHARED)
-      ADD_LIBRARY(plugin_info_tests STATIC ${PLUGIN_INFO_SOURCES})
-    ELSE()
-      ADD_LIBRARY(plugin_info_tests SHARED ${PLUGIN_INFO_SOURCES})
-    ENDIF()
+    ADD_LIBRARY(plugin_info_tests SHARED ${PLUGIN_INFO_SOURCES})
+
 ELSE()
   ADD_LIBRARY(plugin_info_tests STATIC ${PLUGIN_INFO_SOURCES})
 ENDIF()

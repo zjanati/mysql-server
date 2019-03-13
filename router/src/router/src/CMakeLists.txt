@@ -65,11 +65,8 @@ SET(source_files main.cc)
 
 IF(NOT WIN32)
 
-   IF(DISABLE_SHARED)
-        ADD_LIBRARY(router_lib STATIC ${lib_source_files} ${common_files})
-      ELSE()
-        ADD_LIBRARY(router_lib SHARED ${lib_source_files} ${common_files})
-      ENDIF()
+  ADD_LIBRARY(router_lib SHARED ${lib_source_files} ${common_files})
+
   ELSE()
 ELSE()
   # on Windows, we statically link the router lib to otherwise avoid exporting a bunch of symbols
