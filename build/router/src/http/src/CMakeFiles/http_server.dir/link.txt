@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc http_server.so  CMakeFiles/http_server.dir/http_server_plugin.cc.o CMakeFiles/http_server.dir/static_files.cc.o CMakeFiles/http_server.dir/http_server_component.cc.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib http_server.so

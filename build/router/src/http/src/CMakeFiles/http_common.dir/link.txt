@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libhttp_common.a  CMakeFiles/http_common.dir/http_common.cc.o CMakeFiles/http_common.dir/http_time.cc.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libhttp_common.a

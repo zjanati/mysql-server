@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libduktape.a  CMakeFiles/duktape.dir/__/__/__/__/extra/duktape/duktape-2.1.0/src/duktape.c.o CMakeFiles/duktape.dir/__/__/__/__/extra/duktape/duktape-2.1.0/extras/logging/duk_logging.c.o CMakeFiles/duktape.dir/__/__/__/__/extra/duktape/duktape-2.1.0/extras/module-node/duk_module_node.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libduktape.a

@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libhttp_client.a  CMakeFiles/http_client.dir/http_client.cc.o CMakeFiles/http_client.dir/rest_client.cc.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libhttp_client.a
