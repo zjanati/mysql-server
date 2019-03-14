@@ -320,7 +320,6 @@ int vio_socket_timeout(Vio *vio, uint which MY_ATTRIBUTE((unused)),
     if (new_mode != old_mode) ret = vio_set_blocking(vio, new_mode);
   }
 #endif
-
   DBUG_RETURN(ret);
 }
 
@@ -1064,6 +1063,8 @@ bool vio_socket_connect(Vio *vio, struct sockaddr *addr, socklen_t len,
   DBUG_RETURN(MY_TEST(ret));
 }
 
+
+
 /**
   Determine if the endpoint of a connection is still available.
 
@@ -1079,7 +1080,6 @@ bool vio_socket_connect(Vio *vio, struct sockaddr *addr, socklen_t len,
 bool vio_is_connected(Vio *vio) {
   uint bytes = 0;
   DBUG_ENTER("vio_is_connected");
-
   /*
     The first step of detecting an EOF condition is verifying
     whether there is data to read. Data in this case would be

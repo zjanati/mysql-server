@@ -59,29 +59,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
 
 
 
-#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
-#include <stdlib.h>
-const uint8_t *fuzzBuffer;
-size_t fuzzSize;
-size_t fuzzPos;
 
-void sock_initfuzz(const uint8_t *Data, size_t Size) {
-	fuzzPos = 0;
-	fuzzSize = Size;
-	fuzzBuffer = Data;
-}
-
-static int fuzz_recv(char *bufp, int remaining) {
-	if (remaining > fuzzSize - fuzzPos) {
-		remaining = fuzzSize - fuzzPos;
-	}
-	if (fuzzPos < fuzzSize) {
-		memcpy(bufp, fuzzBuffer + fuzzPos, remaining);
-	}
-	fuzzPos += remaining;
-	return remaining;
-}
-#endif
 
 
 
@@ -675,10 +653,6 @@ static inline int inline_mysql_socket_connect(
   }
 #endif
 
-#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
-	return 0;
-#endif
-
   /* Non instrumented code */
   result = connect(mysql_socket.fd, addr, len);
 
@@ -788,11 +762,6 @@ static inline ssize_t inline_mysql_socket_recv(
 
     return result;
   }
-#endif
-
-#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
-result = fuzz_recv(buf, IF_WIN((int), ) n);_
-return result;
 #endif
 
   /* Non instrumented code */

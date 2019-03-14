@@ -281,19 +281,35 @@ static bool vio_init(Vio *vio, enum enum_vio_type type, my_socket sd,
     return false;
   }
 #endif /* HAVE_OPENSSL */
+  if (type == VIO_TYPE_FUZZ) {
+    vio->viodelete = vio_delete;
+  vio->vioerrno = vio_errno;
+  vio->read=vio_read_buff_fuzz;
+  vio->write=vio_write_buff_fuzz;
+  vio->timeout=vio_socket_timeout_fuzz;
+  vio->is_connected = vio_is_connected_fuzz;
+  vio->was_timeout = vio_was_timeout_fuzz;
+  vio->vioshutdown = vio_shutdown_fuzz;
+  vio->viokeepalive = vio_keepalive_fuzz;
+  vio->io_wait = vio_io_wait_fuzz;
+  vio->fastsend = vio_fastsend_fuzz;
+    vio->has_data = vio->read_buffer ? vio_buff_has_data : has_no_data;
+
+    return false;
+  }
   vio->viodelete = vio_delete;
   vio->vioerrno = vio_errno;
-  vio->read = vio->read_buffer ? vio_read_buff : vio_read;
-  vio->write = vio_write;
-  vio->fastsend = vio_fastsend;
-  vio->viokeepalive = vio_keepalive;
+  vio->read = vio->read_buffer ? vio_read_buff : vio_read;//
+  vio->write = vio_write;//
+  vio->fastsend = vio_fastsend;//
+  vio->viokeepalive = vio_keepalive;//
   vio->should_retry = vio_should_retry;
-  vio->was_timeout = vio_was_timeout;
-  vio->vioshutdown = vio_shutdown;
+  vio->was_timeout = vio_was_timeout;//
+  vio->vioshutdown = vio_shutdown;//
   vio->peer_addr = vio_peer_addr;
-  vio->io_wait = vio_io_wait;
-  vio->is_connected = vio_is_connected;
-  vio->timeout = vio_socket_timeout;
+  vio->io_wait = vio_io_wait;//
+  vio->is_connected = vio_is_connected;//
+  vio->timeout = vio_socket_timeout;//
   vio->has_data = vio->read_buffer ? vio_buff_has_data : has_no_data;
 
   return false;
@@ -516,13 +532,15 @@ int vio_timeout(Vio *vio, uint which, int timeout_sec) {
 }
 
 void internal_vio_delete(Vio *vio) {
+  printf("2\n");
   if (!vio) return; /* It must be safe to delete null pointers. */
   if (vio->inactive == false) vio->vioshutdown(vio);
   vio->~Vio();
   my_free(vio);
 }
 
-void vio_delete(Vio *vio) { internal_vio_delete(vio); }
+void vio_delete(Vio *vio) {
+ internal_vio_delete(vio); }
 
 /*
   Cleanup memory allocated by vio or the
@@ -555,7 +573,8 @@ static const vio_string vio_type_names[] = {
     {C_STRING_WITH_LEN("SSL/TLS")},
     {C_STRING_WITH_LEN("Shared Memory")},
     {C_STRING_WITH_LEN("Internal")},
-    {C_STRING_WITH_LEN("Plugin")}};
+    {C_STRING_WITH_LEN("Plugin")},
+    {C_STRING_WITH_LEN("Fuzz")}};
 
 void get_vio_type_name(enum enum_vio_type vio_type, const char **str,
                        int *len) {

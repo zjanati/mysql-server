@@ -4272,6 +4272,14 @@ MYSQL *STDCALL mysql_real_connect(MYSQL *mysql, const char *host,
     }
   }
 #endif /* _WIN32 */
+
+#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
+if (!net->vio &&
+      (mysql->options.protocol == MYSQL_PROTOCOL_FUZZ)) {
+    net->vio =
+        vio_new(0, VIO_TYPE_FUZZ, 0);
+}
+#endif
 #if defined(HAVE_SYS_UN_H)
   if (!net->vio &&
       (!mysql->options.protocol ||
@@ -4574,6 +4582,7 @@ MYSQL *STDCALL mysql_real_connect(MYSQL *mysql, const char *host,
     goto error;
   }
 
+
   /*
     Part 1: Connection established, read and parse first packet
   */
@@ -4708,7 +4717,6 @@ MYSQL *STDCALL mysql_real_connect(MYSQL *mysql, const char *host,
   }
 
   if (cli_establish_ssl(mysql)) goto error;
-
   /*
     Part 2: invoke the plugin to send the authentication data to the server
   */
@@ -5232,7 +5240,6 @@ static bool cli_read_query_result(MYSQL *mysql) {
   ulong field_count;
   ulong length;
   DBUG_ENTER("cli_read_query_result");
-
   if ((length = cli_safe_read(mysql, NULL)) == packet_error) DBUG_RETURN(1);
   free_old_query(mysql); /* Free old result */
 #ifndef MYSQL_SERVER     /* Avoid warn of unused labels*/
@@ -5311,7 +5318,6 @@ int STDCALL mysql_real_query(MYSQL *mysql, const char *query, ulong length) {
     DBUG_SET("-d,inject_ER_NET_READ_INTERRUPTED");
     DBUG_RETURN(1);
   });
-
   if (mysql_send_query(mysql, query, length)) DBUG_RETURN(1);
   retval = (int)(*mysql->methods->read_query_result)(mysql);
   DBUG_RETURN(retval);
