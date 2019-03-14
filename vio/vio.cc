@@ -532,7 +532,6 @@ int vio_timeout(Vio *vio, uint which, int timeout_sec) {
 }
 
 void internal_vio_delete(Vio *vio) {
-  printf("2\n");
   if (!vio) return; /* It must be safe to delete null pointers. */
   if (vio->inactive == false) vio->vioshutdown(vio);
   vio->~Vio();

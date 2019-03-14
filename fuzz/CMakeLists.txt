@@ -2,5 +2,5 @@
 
 MYSQL_ADD_EXECUTABLE(fuzzingNetwork fuzzingNetwork.cc)
 TARGET_LINK_LIBRARIES(fuzzingNetwork library_mysys)
-#TARGET_LINK_LIBRARIES(fuzzingNetwork mysqlclient)
-TARGET_LINK_LIBRARIES(fuzzingNetwork FuzzingEngine)
+TARGET_LINK_LIBRARIES(fuzzingNetwork mysqlclient)
+##TARGET_LINK_LIBRARIES(fuzzingNetwork FuzzingEngine)
