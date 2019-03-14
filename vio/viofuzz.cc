@@ -34,12 +34,12 @@
 //#include "mysql/psi/mysql_socket.h"
 
 
-static char *fuzzBuffer;
+static const uint8_t *fuzzBuffer;
 static size_t fuzzSize;
 static size_t fuzzPos;
 
 
-void sock_initfuzz(char *Data, size_t Size) {
+void sock_initfuzz(const uint8_t *Data, size_t Size) {
 	fuzzPos = 0;
 	fuzzSize = Size;
 	fuzzBuffer = Data;

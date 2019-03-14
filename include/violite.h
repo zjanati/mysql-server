@@ -194,7 +194,7 @@ bool vio_socket_connect(MYSQL_VIO vio, struct sockaddr *addr, socklen_t len,
 bool vio_connect_fuzz(MYSQL_VIO vio, struct sockaddr *addr, socklen_t len,
                         int timeout);
 int vio_socket_timeout_fuzz(Vio *vio, uint which, bool b);
-void sock_initfuzz(char *Data, size_t Size);
+void sock_initfuzz(const uint8_t *Data, size_t Size);
 int fuzz_recv(void *bufp, size_t size);
 size_t vio_read_buff_fuzz(Vio *vio, uchar *buf, size_t size);
 size_t vio_write_buff_fuzz(Vio *vio, const uchar *buf, size_t size);
