@@ -4273,13 +4273,13 @@ MYSQL *STDCALL mysql_real_connect(MYSQL *mysql, const char *host,
   }
 #endif /* _WIN32 */
 
-#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
+//#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
 if (!net->vio &&
       (mysql->options.protocol == MYSQL_PROTOCOL_FUZZ)) {
     net->vio =
         vio_new(0, VIO_TYPE_FUZZ, 0);
 }
-#endif
+//#endif
 #if defined(HAVE_SYS_UN_H)
   if (!net->vio &&
       (!mysql->options.protocol ||

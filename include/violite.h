@@ -190,7 +190,7 @@ int vio_timeout(MYSQL_VIO vio, uint which, int timeout_sec);
 bool vio_socket_connect(MYSQL_VIO vio, struct sockaddr *addr, socklen_t len,
                         int timeout);
 
-#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
+//#ifdef FUZZING_BUILD_WITH_NETWORK_INJECTION
 bool vio_connect_fuzz(MYSQL_VIO vio, struct sockaddr *addr, socklen_t len,
                         int timeout);
 int vio_socket_timeout_fuzz(Vio *vio, uint which, bool b);
@@ -204,7 +204,7 @@ int vio_shutdown_fuzz(Vio *vio);
 int vio_keepalive_fuzz(Vio *vio, bool set_keep_alive);
 int vio_io_wait_fuzz(Vio *vio, enum enum_vio_io_event event, int timeout);
 int vio_fastsend_fuzz(Vio *vio);
-#endif
+//#endif
 
 
 bool vio_get_normalized_ip_string(const struct sockaddr *addr,
